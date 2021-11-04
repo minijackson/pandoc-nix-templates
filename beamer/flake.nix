@@ -10,8 +10,12 @@
     url = "github:dracula/pygments";
     flake = false;
   };
+  inputs.pandoc-templates = {
+    url = "github:minijackson/pandoc-templates";
+    flake = false;
+  };
 
-  outputs = { self, nixpkgs, beamertheme-metropolis, draculaTheme, }:
+  outputs = { self, nixpkgs, beamertheme-metropolis, draculaTheme, pandoc-templates, }:
     let
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
     in
@@ -68,9 +72,15 @@
                   latexmk
 
                   beamercolorthemeowl
+
+                  # For framed code listings
                   tcolorbox environ
 
-                  fvextra pgfopts minted catchfile upquote xstring framed;
+                  # Optional pandoc dependencies
+                  microtype upquote parskip xurl bookmark footnotehyper
+
+                  # Some dependencies
+                  fvextra pgfopts minted catchfile xstring framed;
                 beamertheme-metropolis = { pkgs = [ beamertheme-metropolis' ]; };
               })
             ];
@@ -84,7 +94,7 @@
           chmod -R u+w .
 
           pandoc slides.md -t beamer -so slides.tex  \
-            --template=template.latex \
+            --template=${pandoc-templates}/default.latex \
             --lua-filter=${pkgs.pandoc-lua-filters}/share/pandoc/filters/minted.lua \
             --pdf-engine=xelatex \
             --pdf-engine-opt=-aux-directory=./build \

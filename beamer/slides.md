@@ -51,7 +51,7 @@ Much content
 \tcbset{title=My Title}
 ```
 
-```haskell
+```{.haskell highlightlines=3-4}
 main :: IO ()
 main = print . md5 . pack . unwords =<< getArgs
   where
