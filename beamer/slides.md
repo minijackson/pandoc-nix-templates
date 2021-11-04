@@ -11,8 +11,8 @@ colortheme: owl
 
 # Light theme
 #colorthemeoptions: snowy
-#mintedstyle: perldoc
-#mintedstyle: xcode
+#minted:
+#	style: perldoc
 
 links-as-notes: true
 beameroption: "show notes on second screen=right"
@@ -44,6 +44,25 @@ These are some-notes
 ## Next slide
 
 Much content
+
+## Set code title
+
+```{=latex}
+\tcbset{title=My Title}
+```
+
+```haskell
+main :: IO ()
+main = print . md5 . pack . unwords =<< getArgs
+  where
+    md5 x = hash x :: Digest MD5
+```
+
+```{=latex}
+\tcbset{title=}
+```
+
+## Blocks
 
 ### Block
 

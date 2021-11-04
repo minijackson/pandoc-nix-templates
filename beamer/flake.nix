@@ -68,6 +68,7 @@
                   latexmk
 
                   beamercolorthemeowl
+                  tcolorbox environ
 
                   fvextra pgfopts minted catchfile upquote xstring framed;
                 beamertheme-metropolis = { pkgs = [ beamertheme-metropolis' ]; };
