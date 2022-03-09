@@ -1,4 +1,5 @@
-{ runCommand
+{ lib
+, runCommand
 , makeFontsConf
 , fira
 , fira-code
@@ -13,7 +14,9 @@
 , documentType ? "latex"
 }:
 
-{ name, src }:
+{ name, src, extraPandocArgs ? [ ], extraLatexArgs ? [ ] }:
+
+with lib;
 
 runCommand name
 {
@@ -46,26 +49,34 @@ runCommand name
   FONTCONFIG_FILE = makeFontsConf {
     fontDirectories = [ lmodern freefont_ttf fira fira-code ];
   };
+
+  pandocCmd = ''
+    pandoc ${name}.md -t ${documentType} -so document.tex
+      --template=${pandoc-templates}/default.latex
+      --lua-filter=${pandoc-lua-filters}/share/pandoc/filters/minted.lua
+      --pdf-engine=xelatex
+      --pdf-engine-opt=-aux-directory=./build
+      --pdf-engine-opt=-shell-escape ${escapeShellArgs extraPandocArgs}
+  '';
+
+  latexmkCmd = ''
+    latexmk
+      -shell-escape
+      -xelatex
+      -8bit
+      -interaction=nonstopmode
+      -verbose
+      -file-line-error
+      -output-directory=./build document.tex ${escapeShellArgs extraLatexArgs}
+  '';
 } ''
   unpackFile $src
   cd */
   chmod -R u+w .
 
-  pandoc ${name}.md -t ${documentType} -so document.tex  \
-    --template=${pandoc-templates}/default.latex \
-    --lua-filter=${pandoc-lua-filters}/share/pandoc/filters/minted.lua \
-    --pdf-engine=xelatex \
-    --pdf-engine-opt=-aux-directory=./build \
-    --pdf-engine-opt=-shell-escape
+  $pandocCmd
 
-  latexmk \
-    -shell-escape \
-    -xelatex \
-    -8bit \
-    -interaction=nonstopmode \
-    -verbose \
-    -file-line-error \
-    -output-directory=./build document.tex
+  $latexmkCmd
 
   cp build/document.pdf $out
 ''
