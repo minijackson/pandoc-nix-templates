@@ -8,7 +8,15 @@ final: prev:
   pygments = prev.python3Packages.pygments.overrideAttrs (oldAttrs: {
     postPatch = ''
       cp ${inputs.draculaTheme}/dracula.py pygments/styles/
-      sed -i 's/bg:.\+ //' pygments/styles/inkpot.py
+      sed -i \
+        -e 's/bg:.\+ //' \
+        -e 's/000080/808bed/' \
+        -e 's/800080/ff8bff/' \
+        -e 's/A00000/ce4e4e/' \
+        -e 's/ff0000/ce4e4e/' \
+        -e 's/ffff00/ffcd00/' \
+        -e 's/008400/8fff8b/' \
+        pygments/styles/inkpot.py
     '';
   });
 
