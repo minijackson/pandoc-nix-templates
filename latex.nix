@@ -14,7 +14,7 @@
 , documentType ? "latex"
 }:
 
-{ name, src, extraPandocArgs ? [ ], extraLatexArgs ? [ ] }:
+{ name, src, extraPandocArgs ? "", extraLatexArgs ? "" }:
 
 with lib;
 
@@ -56,7 +56,7 @@ runCommand name
       --lua-filter=${pandoc-lua-filters}/share/pandoc/filters/minted.lua
       --pdf-engine=xelatex
       --pdf-engine-opt=-aux-directory=./build
-      --pdf-engine-opt=-shell-escape ${escapeShellArgs extraPandocArgs}
+      --pdf-engine-opt=-shell-escape ${extraPandocArgs}
   '';
 
   latexmkCmd = ''
@@ -67,7 +67,7 @@ runCommand name
       -interaction=nonstopmode
       -verbose
       -file-line-error
-      -output-directory=./build document.tex ${escapeShellArgs extraLatexArgs}
+      -output-directory=./build document.tex ${extraLatexArgs}
   '';
 } ''
   unpackFile $src
