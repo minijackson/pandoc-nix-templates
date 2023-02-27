@@ -3,6 +3,8 @@
 , makeFontsConf
 , fira
 , fira-code
+, league-of-moveable-type
+, inkscape
 , freefont_ttf
 , lmodern
 , pandoc
@@ -27,23 +29,9 @@ runCommand name
     pygments
     fira-code
     which
-    (texlive.combine {
-      inherit (texlive)
-        scheme-medium
-        latexmk
-
-        beamertheme-metropolis
-        beamercolorthemeowl
-
-        # For framed code listings
-        tcolorbox environ
-
-        # Optional pandoc dependencies
-        microtype upquote parskip xurl bookmark footnotehyper
-
-        # Some dependencies
-        fvextra pgfopts minted catchfile xstring framed;
-    })
+    texlive.combined.scheme-full
+    league-of-moveable-type
+    inkscape
   ];
 
   FONTCONFIG_FILE = makeFontsConf {
