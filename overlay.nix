@@ -6,6 +6,7 @@ final: prev:
   inherit (inputs) pandoc-templates;
 
   pygments = prev.python3Packages.pygments.overrideAttrs (oldAttrs: {
+    # TODO: disable italic for non-normal comments for Perldoc style
     postPatch = ''
       cp ${inputs.draculaTheme}/dracula.py pygments/styles/
       sed -i \
@@ -17,6 +18,11 @@ final: prev:
         -e 's/ffff00/ffcd00/' \
         -e 's/008400/8fff8b/' \
         pygments/styles/inkpot.py
+
+      sed -i \
+        -e 's/bg:.\+ //' \
+        -e 's/#228B22/italic #228B22/' \
+        pygments/styles/perldoc.py
     '';
   });
 

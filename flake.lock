@@ -1,0 +1,78 @@
+{
+  "nodes": {
+    "beamertheme-metropolis": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1533142502,
+        "narHash": "sha256-1HptXntlCUtXwhKuenuVjsj4K3oK5eOsNPZ9+nwSczg=",
+        "owner": "matze",
+        "repo": "mtheme",
+        "rev": "2fa6084b9d34fec9d2d5470eb9a17d0bf712b6c8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "matze",
+        "repo": "mtheme",
+        "type": "github"
+      }
+    },
+    "draculaTheme": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1647823152,
+        "narHash": "sha256-nhuG6QUJgoD2/BtKYrC6OmBSzIQeMNe5NNQqjG6d+Uw=",
+        "owner": "dracula",
+        "repo": "pygments",
+        "rev": "9cf371f24908e2b138cfcf0a87d0d654b4befd8f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dracula",
+        "repo": "pygments",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1677676435,
+        "narHash": "sha256-6FxdcmQr5JeZqsQvfinIMr0XcTyTuR7EXX0H3ANShpQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "a08d6979dd7c82c4cef0dcc6ac45ab16051c1169",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "pandoc-templates": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1636017162,
+        "narHash": "sha256-6mnivyy0F3eqiZC6A0z2oSf40JfWS9U3HkKIW5g/NcQ=",
+        "owner": "minijackson",
+        "repo": "pandoc-templates",
+        "rev": "99e04d26dbd1a1056d8664c8cbeb96a06a1dbe11",
+        "type": "github"
+      },
+      "original": {
+        "owner": "minijackson",
+        "repo": "pandoc-templates",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "beamertheme-metropolis": "beamertheme-metropolis",
+        "draculaTheme": "draculaTheme",
+        "nixpkgs": "nixpkgs",
+        "pandoc-templates": "pandoc-templates"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
